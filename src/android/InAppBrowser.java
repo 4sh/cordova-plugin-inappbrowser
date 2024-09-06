@@ -18,6 +18,8 @@
 */
 package org.apache.cordova.inappbrowser;
 
+import static android.content.pm.PackageManager.MATCH_DEFAULT_ONLY;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -484,7 +486,6 @@ public class InAppBrowser extends CordovaPlugin {
      */
     private void openExternalExcludeCurrentApp(Intent intent) {
         String currentPackage = cordova.getActivity().getPackageName();
-        boolean hasCurrentPackage = false;
 
         PackageManager pm = cordova.getActivity().getPackageManager();
         List<ResolveInfo> activities = pm.queryIntentActivities(intent, 0);
@@ -496,22 +497,14 @@ public class InAppBrowser extends CordovaPlugin {
                 targetIntent.setPackage(ri.activityInfo.packageName);
                 targetIntents.add(targetIntent);
             }
-            else {
-                hasCurrentPackage = true;
-            }
         }
 
-        // If the current app package isn't a target for this URL, then use
-        // the normal launch behavior
-        if (hasCurrentPackage == false || targetIntents.size() == 0) {
-            this.cordova.getActivity().startActivity(intent);
-        }
         // If there's only one possible intent, launch it directly
-        else if (targetIntents.size() == 1) {
+        if (targetIntents.size() == 1) {
             this.cordova.getActivity().startActivity(targetIntents.get(0));
         }
         // Otherwise, show a custom chooser without the current app listed
-        else if (targetIntents.size() > 0) {
+        else if (targetIntents.size() >= 2) {
             Intent chooser = Intent.createChooser(targetIntents.remove(targetIntents.size()-1), null);
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetIntents.toArray(new Parcelable[] {}));
             this.cordova.getActivity().startActivity(chooser);
