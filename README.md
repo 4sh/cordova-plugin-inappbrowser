@@ -24,6 +24,16 @@ description: Open an in-app browser window.
 
 # cordova-plugin-inappbrowser
 
+# ⚠️ Deprecated
+
+This plugin is no longer maintained.
+
+It has known issues starting with iOS 26+, including major layout problems caused by Liquid Glass.
+
+Please use the [original repository](https://github.com/apache/cordova-plugin-inappbrowser) instead.
+
+
+
 [![Android Testsuite](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/android.yml/badge.svg)](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/android.yml) [![Chrome Testsuite](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/chrome.yml/badge.svg)](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/chrome.yml) [![iOS Testsuite](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/ios.yml/badge.svg)](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/ios.yml) [![Lint Test](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/lint.yml/badge.svg)](https://github.com/apache/cordova-plugin-inappbrowser/actions/workflows/lint.yml)
 
 You can show helpful articles, videos, and web resources inside of your app. Users can view web pages without leaving your app.
